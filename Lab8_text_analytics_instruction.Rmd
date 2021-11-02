@@ -29,12 +29,6 @@ library(tidytext)
 
 ```
 
-```{r echo=F}
-
-xfun::embed_file('data/covid19_tweets.csv')
-
-
-```
 
 In this lab we will check out the tidy text and sentiment analysis of the covid Tweets in R. Load the dataset in R. 
 
