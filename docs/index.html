@@ -389,12 +389,12 @@ Aug_count2%&gt;%
     labs(y = &quot;Word count by sentiment&quot;,x = NULL) +
     coord_flip()</code></pre>
 <p>Now the bar chart makes more sense. We can generate a wordcloud to visualize the content.</p>
-<p>For example, instead of using pure word frequency, we can generate a wordcloud for the most postive or negative terms overall for the entire dataset.</p>
-<p>In the wordcloud function, we specify the word to be plotted is from <code>term</code>. Since all the terms are ordered my number of occurence in the dataset (in count, sort=T), we use <code>n</code> as the frequencies. In this case, the most common word will be displayed in this wordcloud. We set 100 number of words to be plotted in this figure.</p>
+<p>For example, instead of using pure word frequency, we can generate a wordcloud for the most positive or negative terms overall for the entire dataset.</p>
+<p>In the wordcloud function, we specify the word to be plotted is from <code>term</code>. Since all the terms are ordered my number of occurrence in the dataset (in count, sort=T), we use <code>n</code> as the frequencies. In this case, the most common word will be displayed in this wordcloud. We set 100 number of words to be plotted in this figure.</p>
 <pre class="r"><code>library(wordcloud)
 covid_bing2 %&gt;% count(term, sentiment, sort = TRUE) %&gt;% 
     with(wordcloud(term, n, max.words = 100))</code></pre>
-<p>However, it is hard to tell if it is a positive or negative term. We can genernate a comparison wordcloud to color terms differently based on their sentiment.The <code>comparison.cloud</code> function will plot a cloud comparing the frequencies (here is count) of words across documents. Here we color positive term in blue, and negative term in red.</p>
+<p>However, it is hard to tell if it is a positive or negative term. We can generate a comparison wordcloud to color terms differently based on their sentiment.The <code>comparison.cloud</code> function will plot a cloud comparing the frequencies (here is count) of words across documents. Here we color positive term in blue, and negative term in red.</p>
 <pre class="r"><code>library(reshape2)
 library(wordcloud)
 covid_bing2 %&gt;% count(term, sentiment, sort = TRUE) %&gt;%
@@ -411,7 +411,7 @@ covid_affin[covid_affin$term== &quot;positive&quot;,]$value &lt;- -2
 covid_affin %&gt;% group_by(dday) %&gt;%
     summarise(sentiment = sum(value)) %&gt;% ggplot()+geom_line(aes(dday, sentiment))+
   theme_minimal()+labs(title=&quot;Sentiment based on afinn&quot;)</code></pre>
-<p>We can also generate sentiment trend based on the bing dictionary. Originally each term is labled in positive or negative, we can first count how many positive and negative terms per day, and calculate a new column as sentiment score which is the difference between the number of positive and negative term. Check out the plot below. The overall pattern is similar to the trend we get using afinn dictionary.</p>
+<p>We can also generate sentiment trend based on the bing dictionary. Originally each term is labeled in positive or negative, we can first count how many positive and negative terms per day, and calculate a new column as sentiment score which is the difference between the number of positive and negative term. Check out the plot below. The overall pattern is similar to the trend we get using afinn dictionary.</p>
 <pre class="r"><code>covid_sentiment_bing &lt;- covid_bing2 %&gt;%
     count(dday,sentiment) %&gt;%
     spread(sentiment, n, fill = 0) %&gt;%
@@ -419,7 +419,7 @@ covid_affin %&gt;% group_by(dday) %&gt;%
 
 ggplot(covid_sentiment_bing, aes(dday, sentiment)) +
     geom_line()+theme_minimal()+labs(title=&quot;Sentiment based on bing&quot;)</code></pre>
-<p>Similarly, we can use the <code>nrc</code> dictionary to plot out sentiment trend by groups too. Note nrc dictionary will label terms into 10 different emotional groups. Let’s check out how many terms are mentioned each day per group. For the nrc dictionary, there are lots of terms are labled as positive. It could potentially influence our analysis.</p>
+<p>Similarly, we can use the <code>nrc</code> dictionary to plot out sentiment trend by groups too. Note nrc dictionary will label terms into 10 different emotional groups. Let’s check out how many terms are mentioned each day per group. For the nrc dictionary, there are lots of terms are labeled as positive. It could potentially influence our analysis.</p>
 <pre class="r"><code># label each term using nrc dictionary
 covid_nrc&lt;- tidy_covid %&gt;% 
     inner_join(get_sentiments(&quot;nrc&quot;), by=c(&quot;term&quot;=&quot;word&quot;))
@@ -445,7 +445,7 @@ ggplot(nrc_count)+geom_line(aes(x=dday, y=n, color=sentiment),
     unnest_tokens(pair, text,token = &quot;ngrams&quot;, n = 2)</code></pre>
 <p>Examine the <code>covid_bigram</code> data. The last column <code>pair</code> represents the pair of words.</p>
 <p>Note we have not excluded the stop words. Below we exclude all the stop words for each term under column <code>pair</code>. First, we need to re-structure “pair” column to split two terms into two column: word1 and word2. Next we can anti join the stop words respectively.</p>
-<pre class="r"><code># Seperate two terms apart. 
+<pre class="r"><code># Separate two terms apart. 
 bigrams_separated &lt;- covid_bigram %&gt;%
   separate(pair, c(&quot;word1&quot;, &quot;word2&quot;), sep = &quot; &quot;)
 
@@ -505,7 +505,7 @@ covid_affin %&gt;% group_by(dday) %&gt;%
 bigram_graph &lt;- bigram_counts %&gt;%
     filter(n &gt; 30) %&gt;% # customize frequency 
     graph_from_data_frame()</code></pre>
-<p>The bigram_graph object includes the relationship between each terms in paris. We also assign different colors for positive and negative relationship. Now we can plot out the graph:</p>
+<p>The bigram_graph object includes the relationship between each terms in pairs. We also assign different colors for positive and negative relationship. Now we can plot out the graph:</p>
 <pre class="r"><code>library(ggraph)
 ggraph(bigram_graph, layout = &#39;fr&#39;) +
     geom_edge_link(aes(colour = sentiment)) +
