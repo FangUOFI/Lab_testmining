@@ -261,7 +261,7 @@ library(tidytext)</code></pre>
 covid$text &lt;- gsub(&quot;&amp;amp&quot;, &quot;&quot;, covid$text)
 # Remove numbers in text
 covid$text &lt;- gsub(&quot;[[:digit:]]+&quot;, &quot;&quot;, covid$text)
-# Remove punctuations
+# Remove punctuation
 covid$text &lt;- gsub(&quot;[[:punct:]]&quot;, &quot;&quot;, covid$text)
 # Remove @user names
 covid$text &lt;- gsub(&quot;@\\w+&quot;, &quot;&quot;, covid$text)
