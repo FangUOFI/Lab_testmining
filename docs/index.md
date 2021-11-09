@@ -71,9 +71,9 @@ covid$ID <- seq.int(nrow(covid))
 
 ## 1. Tidy text format
 
-Check out the text column in the covid dataset. The content is still in the raw text format, which include punctuations, user names, links etc. Let's first remove these unnecessary characters. 
+Check out the text column in the covid dataset. The content is still in the raw text format, which include punctuation, user names, links etc. Let's first remove these unnecessary characters. 
 
-The `gsub` function will perform replacement of certain characters and patterns in a string. We will directly overwrite the output to the `text` colum. In the gsub function, the first argument is the pattern we are looking for, and the second argument is the replacement for matched pattern. We leave the second argument as blank strings to remove the unnecessary patterns. The third argument is the text column we are working on. 
+The `gsub` function will perform replacement of certain characters and patterns in a string. We will directly overwrite the output to the `text` Column. In the `gsub` function, the first argument is the pattern we are looking for, and the second argument is the replacement for matched pattern. We leave the second argument as blank strings to remove the unnecessary patterns. The third argument is the text column we are working on. 
 
 
 ```r
@@ -85,7 +85,7 @@ covid$text <- gsub("[[:digit:]]+", "", covid$text)
 covid$text <- gsub("[[:punct:]]", "", covid$text)
 # Remove @user names
 covid$text <- gsub("@\\w+", "", covid$text)
-# Remove hashtags
+# Remove hash tags
 covid$text <- gsub("#\\w+", "", covid$text)
 # Remove links in text. 
 covid$text <- gsub("http\\w+", "", covid$text)

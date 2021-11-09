@@ -255,8 +255,8 @@ library(tidytext)</code></pre>
 </div>
 <div id="tidy-text-format" class="section level2">
 <h2>1. Tidy text format</h2>
-<p>Check out the text column in the covid dataset. The content is still in the raw text format, which include punctuations, user names, links etc. Let’s first remove these unnecessary characters.</p>
-<p>The <code>gsub</code> function will perform replacement of certain characters and patterns in a string. We will directly overwrite the output to the <code>text</code> colum. In the gsub function, the first argument is the pattern we are looking for, and the second argument is the replacement for matched pattern. We leave the second argument as blank strings to remove the unnecessary patterns. The third argument is the text column we are working on.</p>
+<p>Check out the text column in the covid dataset. The content is still in the raw text format, which include punctuation, user names, links etc. Let’s first remove these unnecessary characters.</p>
+<p>The <code>gsub</code> function will perform replacement of certain characters and patterns in a string. We will directly overwrite the output to the <code>text</code> Column. In the <code>gsub</code> function, the first argument is the pattern we are looking for, and the second argument is the replacement for matched pattern. We leave the second argument as blank strings to remove the unnecessary patterns. The third argument is the text column we are working on.</p>
 <pre class="r"><code># Remove &amp;amp
 covid$text &lt;- gsub(&quot;&amp;amp&quot;, &quot;&quot;, covid$text)
 # Remove numbers in text
@@ -265,7 +265,7 @@ covid$text &lt;- gsub(&quot;[[:digit:]]+&quot;, &quot;&quot;, covid$text)
 covid$text &lt;- gsub(&quot;[[:punct:]]&quot;, &quot;&quot;, covid$text)
 # Remove @user names
 covid$text &lt;- gsub(&quot;@\\w+&quot;, &quot;&quot;, covid$text)
-# Remove hashtags
+# Remove hash tags
 covid$text &lt;- gsub(&quot;#\\w+&quot;, &quot;&quot;, covid$text)
 # Remove links in text. 
 covid$text &lt;- gsub(&quot;http\\w+&quot;, &quot;&quot;, covid$text)
