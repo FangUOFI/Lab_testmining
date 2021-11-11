@@ -81,10 +81,10 @@ The `gsub` function will perform replacement of certain characters and patterns 
 covid$text <- gsub("&amp", "", covid$text)
 # Remove numbers in text
 covid$text <- gsub("[[:digit:]]+", "", covid$text)
-# Remove punctuation
-covid$text <- gsub("[[:punct:]]", "", covid$text)
 # Remove @user names
 covid$text <- gsub("@\\w+", "", covid$text)
+# Remove punctuation
+covid$text <- gsub("[[:punct:]]", "", covid$text)
 # Remove hash tags
 covid$text <- gsub("#\\w+", "", covid$text)
 # Remove links in text. 
