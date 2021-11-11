@@ -91,7 +91,7 @@ covid$text  <- gsub("^ ", "", covid$text )
 covid$text  <- gsub(" $", "", covid$text )
 ```
 
-Currently the data is one-tweet per row. We need to convert and transform the table into a tidy text format first. Recall a tidy text format is a table with one-token-per-row. We will use the basic tokenization process to break down the text into individual words. Under the `unnest_tokens` function, we name the output column as "term", and the input column is `text` in the covid dataset. We set the unit of token at words level. The tokens are stored into a new dataset calle covid_token. 
+Currently the data is one-tweet per row. We need to convert and transform the table into a tidy text format first. Recall a tidy text format is a table with one-token-per-row. We will use the basic tokenization process to break down the text into individual words. Under the `unnest_tokens` function, we name the output column as "term", and the input column is `text` in the covid dataset. We set the unit of token at words level. The tokens are stored into a new dataset called covid_token. 
 
 
 ```{r eval=F}
@@ -241,7 +241,7 @@ ggplot(data=Aug_sentiment,aes(word, n, fill = sentiment)) +
 
 For the top 10 positive terms, you will soon realize that the term "positive" by default is positive, but under this covid scenario, it should indicate something negative since it might actually record they got covid test positive, or how many positive cases are there. In addition, the term "trump" should not be a positive nor negative term. We need to further refine the sentiment categories. 
 
-Let's change term "positive" as a negative term (same for affin dictionary, it is originally lables as score 2. You can change it into -2 too) for this project, and remove term "trump" in the list since it should be a netrual term. Then let's generate a new bar graph for positive and negative terms on Aug 11th. 
+Let's change term "positive" as a negative term (same for affin dictionary, it is originally labels as score 2. You can change it into -2 too) for this project, and remove term "trump" in the list since it should be a neutral term. Then let's generate a new bar graph for positive and negative terms on Aug 11th. 
 
 ```{r eval=F}
 # assign sentiment as negative for term positive
@@ -481,7 +481,7 @@ In this lab, we explore the tweets with hashtag covid from July 2020 to August 2
 
 1) Get your dataset clean. Note the raw text data could be very messy: special characters, typos,spaces, tabs, abbreviations etc. 
 
-2) Then you need to determine what level do you want to explore to crete your tokens: single word? pair of words? or sentences?
+2) Then you need to determine what level do you want to explore to create your tokens: single word? pair of words? or sentences?
 
 3) After generate tokens in a proper unit, you need to exclude stop words. Note based on different scenarios, you might need to manually exclude some words which are not provided by the stop words dataset
 

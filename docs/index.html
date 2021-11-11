@@ -273,7 +273,7 @@ covid$text &lt;- gsub(&quot;http\\w+&quot;, &quot;&quot;, covid$text)
 covid$text  &lt;- gsub(&quot;^ &quot;, &quot;&quot;, covid$text )
 # Remove blank spaces at the end
 covid$text  &lt;- gsub(&quot; $&quot;, &quot;&quot;, covid$text )</code></pre>
-<p>Currently the data is one-tweet per row. We need to convert and transform the table into a tidy text format first. Recall a tidy text format is a table with one-token-per-row. We will use the basic tokenization process to break down the text into individual words. Under the <code>unnest_tokens</code> function, we name the output column as “term”, and the input column is <code>text</code> in the covid dataset. We set the unit of token at words level. The tokens are stored into a new dataset calle covid_token.</p>
+<p>Currently the data is one-tweet per row. We need to convert and transform the table into a tidy text format first. Recall a tidy text format is a table with one-token-per-row. We will use the basic tokenization process to break down the text into individual words. Under the <code>unnest_tokens</code> function, we name the output column as “term”, and the input column is <code>text</code> in the covid dataset. We set the unit of token at words level. The tokens are stored into a new dataset called covid_token.</p>
 <pre class="r"><code>covid_token &lt;- covid %&gt;%
     unnest_tokens(term, text,token = &quot;words&quot;)</code></pre>
 <p>Now that the covid_token data is in one-word-per-row format. Examine the covid_token dataset. All the other attributes e.g. user name are preserved, and each tweets are split into multiple terms, so we get a longer table in this tidy text format. The column called “term” are the tokens.</p>
@@ -367,7 +367,7 @@ ggplot(data=Aug_sentiment,aes(word, n, fill = sentiment)) +
     labs(y = &quot;Word count by sentiment&quot;,x = NULL) +
     coord_flip()</code></pre>
 <p>For the top 10 positive terms, you will soon realize that the term “positive” by default is positive, but under this covid scenario, it should indicate something negative since it might actually record they got covid test positive, or how many positive cases are there. In addition, the term “trump” should not be a positive nor negative term. We need to further refine the sentiment categories.</p>
-<p>Let’s change term “positive” as a negative term (same for affin dictionary, it is originally lables as score 2. You can change it into -2 too) for this project, and remove term “trump” in the list since it should be a netrual term. Then let’s generate a new bar graph for positive and negative terms on Aug 11th.</p>
+<p>Let’s change term “positive” as a negative term (same for affin dictionary, it is originally labels as score 2. You can change it into -2 too) for this project, and remove term “trump” in the list since it should be a neutral term. Then let’s generate a new bar graph for positive and negative terms on Aug 11th.</p>
 <pre class="r"><code># assign sentiment as negative for term positive
 covid_bing[covid_bing$term== &quot;positive&quot;,]$sentiment &lt;- &quot;negative&quot;
 
@@ -518,7 +518,7 @@ ggraph(bigram_graph, layout = &#39;fr&#39;) +
 <p>In this lab, we explore the tweets with hashtag covid from July 2020 to August 2020. Here are a few tips for text analytics:</p>
 <ol style="list-style-type: decimal">
 <li><p>Get your dataset clean. Note the raw text data could be very messy: special characters, typos,spaces, tabs, abbreviations etc.</p></li>
-<li><p>Then you need to determine what level do you want to explore to crete your tokens: single word? pair of words? or sentences?</p></li>
+<li><p>Then you need to determine what level do you want to explore to create your tokens: single word? pair of words? or sentences?</p></li>
 <li><p>After generate tokens in a proper unit, you need to exclude stop words. Note based on different scenarios, you might need to manually exclude some words which are not provided by the stop words dataset</p></li>
 <li><p>We have introduced three different lexicons for sentiment analysis. You can use any of these in the future, just depend on how you want to score your terms: in numeric format? or binary classes?</p></li>
 <li><p>You need to take care of terms which follow a negation. Usually you can check out bigrams.</p></li>
