@@ -394,7 +394,7 @@ not_words <- bigrams_separated %>%
 
 In this `not_words`table, it summarizes the most sentiment-associated terms which follows 'not'. e.g. not safe, not alone. Again since these pairs of terms indicate inversed sentiment direction compared with the term itself. Let's evaluate its impact toward the “wrong” direction. In this `not_words`table, `value` means the score assigned from afinn dictionary, and n is the number of times they appear in the entire tweet dataset. 
 
-Let's generate a new score column, which multiplies sentiment value by the number of times they appear. It incidates the "contribution" of sentiment toward the wrong direction. Here top ones are "not good", "not true", "not safe" etc. Apparently you can tell that people are feeling panic. 
+Let's generate a new score column, which multiplies sentiment value by the number of times they appear. It indicates the "contribution" of sentiment toward the wrong direction. Here top ones are "not good", "not true", "not safe" etc. Apparently you can tell that people are feeling panic. 
 
 ```{r eval=F}
 not_words %>%
